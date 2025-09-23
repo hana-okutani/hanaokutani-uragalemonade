@@ -426,6 +426,12 @@ nav li a {
     padding-block-end: var(--space-xl);
     position: relative;
     overflow-x: clip;
+    /* 追記 */
+    /* border: 8px solid green; */
+    background-image: url(images/hero_wave_bg.png);
+    background-repeat: no-repeat;     /* 繰り返しなし */
+    background-size: 100% auto;       /* 横幅いっぱいに広げる（縦は自動） */
+    background-position: bottom;      /* 下に揃える */
 }
 
 @media (min-width: 1024px) {
@@ -436,32 +442,38 @@ nav li a {
         position: relative;
 
         /* ★ 900px以上では最大高さを1054pxに制限 */
-        max-block-size: 1054px;
+        /* max-block-size: 1054px; */
         /* = max-height */
     }
 }
 
 .hero__black-ship {
-    width: clamp(160px, calc(160px + (174 * (100vw - 390px) / 810)), 250px);
-    position: relative;
+    /* width: clamp(160px, calc(160px + (174 * (100vw - 390px) / 810)), 250px); */
+    width: clamp(160px, calc(160px + (174 * (100vw - 390px) / 810)), 344px);
+    /* MEMO: コメントアウト */
+    /* position: relative; */
     margin: 0;
     margin-left: auto;
-    top: 0;
+    /* top: 0; */
     transform: translateY(20%);
+    /* MEMO: 追記 */
+    position: absolute;
+    right: 0;
 }
 
 .hero__glassbottle {
     width: clamp(350px, 60vw, 460px);
     filter: drop-shadow(18px 21px 12px rgba(0, 50, 101, 0.6));
-    margin-inline-start: clamp(13%, 60vw, 25%);
+    /* margin-inline-start: clamp(13%, 60vw, 25%); */
     margin-bottom: 0;
 }
 
 @media (min-width: 1024px) {
     .hero__glassbottle {
         /*スムーズではないけど、上にあげる*/
-        position: relative;
-        top: -200px;
+        /* MEMO: コメントアウト */
+        /* position: relative;
+        top: -200px; */
     }
 }
 
@@ -477,6 +489,9 @@ nav li a {
 
     /* ～899px までは中央寄せ */
     margin-inline: auto;
+
+    /* MEMO: 追記 */
+    padding-top: 32%;
 }
 
 /* 900pxから右寄せに移行（900pxで48pxの右余白→1200pxで0pxへ）*/
@@ -493,8 +508,9 @@ nav li a {
 
     /*スムーズではないけど、上にあげる*/
     .hero__title-group {
-        position: relative;
-        top: -650px;
+        /* MEMO: コメントアウト */
+        /* position: relative;
+        top: -650px; */
     }
 }
 
@@ -548,19 +564,24 @@ nav li a {
     box-shadow: 0 4px 6px -1px #488aec31,
         0 2px 4px -1px #488aec17;
     transition: all 0.6s ease;
-    position: relative;
+    /* MEMO: コメントアウト */
+    /* position: relative; */
     z-index: 1;
+    /* MEMO: 追記 */
+    position: absolute;
+    bottom: -45%;
+    left: -12%;
 }
 
 @media (min-width: 900px) {
     .hero__button {
-        margin-inline: 0;
-        margin-inline-start: 50px;
+        /* margin-inline: 0;
+        margin-inline-start: 50px; */
         /* 必要なら微調整 */
         width: 30%;
         aspect-ratio: 1/1;
         border-radius: 9999px;
-        position: relative;
+        /* position: relative; */
 
         /* 中央寄せ（縦横） */
         display: grid;
@@ -570,14 +591,15 @@ nav li a {
         padding: 0;
 
         /* 900→1200pxで 0 → -80px 上へスライド（パディングの影響を受けにくい） */
-        transform: translateY(clamp(-300px, calc(-300px * ((100vw - 900px) / 300)), 0px));
-        will-change: transform;
+        /* MEMO: コメントアウト */
+        /* transform: translateY(clamp(-300px, calc(-300px * ((100vw - 900px) / 300)), 0px));
+        will-change: transform; */
     }
 }
 
 @media (min-width: 1024px) {
     .hero__button {
-        width: 18%;
+        width: 33%;
         transform: translate(65vw, -40vw);
         font-size: var(--fs-p);
     }
@@ -603,27 +625,27 @@ nav li a {
 /* セクション切り替え */
 /* 擬似要素で波型SVGを配置 */
 .hero::after {
-    content: "";
+    /* content: "";
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1%;
+    bottom: -1%; */
     /* セクションの下端に貼り付け */
-    width: 100%;
+    /* width: 100%; */
     /* 常に要素幅＝画面幅いっぱい */
-    height: clamp(120px, 66vw, 600px);
+    /* height: clamp(120px, 66vw, 600px); */
     /* 縦はvwで可変（比率に合わせて調整可） */
-    background: url("images/wave1.svg") center bottom / 100% auto no-repeat;
+    /* background: url("images/wave1.svg") center bottom / 100% auto no-repeat; */
     /* 横100%ではみ出さない*/
-    pointer-events: none;
-    z-index: 0;
+    /* pointer-events: none;
+    z-index: 0; */
     /* テキストより背面、背景色より前面の安全位置 */
 }
 
 @media (min-width: 900px) {
-    .hero::after {
+    /* .hero::after {
         transform: translateY(clamp (1%, 2vw, 13%));
-    }
+    } */
 }
 
 /* STORY */
@@ -1364,3 +1386,18 @@ footer::before {
     z-index: -1;
     /* フッター背景より前・テキストより後ろに調整可 */
 }
+
+/* 以下追記 */
+.common__container {
+    width: 100%;
+    max-width: 1000px;
+    margin-inline: auto;
+    /* border: 8px solid red; */
+    position: relative;
+}
+
+/* hero 追記 */
+.hero__contents {
+    display: flex;
+}
+
