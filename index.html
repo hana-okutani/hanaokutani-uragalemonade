@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>浦賀砲台レモネード</title>
+    <meta name='description' content='説明'>
+    <!--CSS-->
+    <link rel='stylesheet' href='stylesheet.css'>
+    <!--フォント-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <!--アイコン-->
+    <script defer src="https://use.fontawesome.com/releases/v7.0.1/js/all.js"></script>
+    <!--ファビコン-->
+    <link rel='icon' href='/favicon.ico'>
+    <!--ページトランジション-->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // ページ表示時にフェードイン
+            document.body.classList.remove("fadeout");
+        });
+        // すべてのリンクにフェードアウトを仕込む
+        document.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", e => {
+                const url = link.getAttribute("href");
+                if (url && !url.startsWith("#")) { // ページ内リンクは無視
+                    e.preventDefault();
+                    document.body.classList.add("fadeout");
+                    setTimeout(() => { window.location.href = url; }, 600); // アニメーション時間と合わせる
+                }
+            });
+        });
+    </script>    
+</head>
+
+<body>
+    <header class='site-header'>
+        <!-- トグル（非表示のチェックボックス） -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="メニューを開閉">
+        <!-- ハンバーガーアイコン（ラベル） -->
+        <label for="nav-toggle" class="hamburger" aria-hidden="true">
+            <span class="bar"></span>
+        </label>
+        <nav class='site-nav' aria-label='主ナビ'>
+            <ul>
+                <li><a href='index.html#story' class="nav-underline">STORY</a></li>
+                <li><a href='index.html#about' class="nav-underline">浦賀砲台レモンとは？</a></li>
+                <li><a href='index.html#charms' class="nav-underline">3つの魅力</a></li>
+                <li><a href='index.html#access' class="nav-underline">販売場所について</a></li>
+                <li><a href='index.html#contact' class="nav-underline">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <img src="images/black-ship.png" alt="" class="hero__black-ship">
+            <img src="images/glassbottle_lemonade.png" alt="商品画像" class="hero__glassbottle">
+            <div class="hero__title-group">
+                <p class="hero__subtitle">砲台跡地から生まれた、<br>世界をつなぐ一杯。</p>
+                <img src="images/title-logo.svg" alt="浦賀砲台レモネード" class="hero_title-logo">
+                <p class="hero__subtitle--en">Uraga Lemonade from<br>Historic Fortress</p>
+            </div>
+            <a href="index.html#access" class="hero__button">販売場所をみる</a>
+        </section>
+        <div class="wrapper">
+            <section class="story" id="story">
+                <div class="story__wrapper">
+                    <h1 class="story__heading">STORY</h1>
+                        <p>開国の港・浦賀。<br>国際都市・横須賀。</p>
+                        <p>この地域はいつの時代も「新しい文化を受け入れる場所」でした。</p>
+                        <p>そんな国際的な風土は今も、新しい味を生み出しています。</p>
+                        <p>"レモネード"というグローバルな飲み物を、ここ浦賀のレモンで仕上げました。</p>
+                    <img src="images/japaneseandforeigner.jpg" alt="" class="story__img">
+                    <div class="text-box">
+                        <p>日本人にも外国人にも愛されるよう、願いを込めて。</p>
+                        <p>浦賀砲台レモネードは、「地域の誇り」と「国際性」が融合した新しいご当地ドリンクです。</p>
+                    </div>
+                </div>
+            </section> 
+            <section class="about" id="about">
+                <div class="about__wrapper">
+                    <h2 class="about__heading">浦賀砲台レモンとは？</h2><!--背景のレモンは擬似要素で-->
+                    <div class="about1">
+                        <img src="images/about1.png" alt="" class="about1__img">
+                        <div class="text-box">
+                            <h3>無農薬・皮ごと安心</h3>
+                            <p>浦賀砲台レモンは、化学農薬を使わずに大切に育てられています。そのため皮までまるごと安心して味わえるのが特徴です。</p>
+                            <p>レモネードやスイーツにも、そのまま使えますので、自然な香りと爽やかさをお楽しみいただけます。</p>
+                        </div>   
+                    </div>
+                    <div class="about2">
+                        <img src="images/about2.png" alt="" class="about2__img">
+                        <div class="text-box">
+                            <h3>砲台跡地を活用した農園</h3>
+                            <p>明治時代に築かれた砲台の跡地を、新しいかたちで生かしたのが農園『レモンガーデン浦賀』です。</p>
+                            <p>かつて海を守った場所は、いまではレモンの木々が育ち、訪れる人に平和と安らぎを届ける場所へと変わりました。</p>
+                            <p>歴史ある風景とともに実るレモンは、ここでしか出会えない特別な恵みです。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="story-divider top">
+                <img src="images/lemon-drop.png" alt="" class="lemon-drop">
+                <h3>浦賀砲台レモンだから作れた<br>クラフトドリンク、</h3>
+                <img src="images/lemon-drop.png" alt="" class="lemon-drop">
+                <h2>それが<br>浦賀砲台レモネードです。</h2>
+            </div>
+            <section class="charms" id="charms">
+                <div class="charms__divider">
+                    <img src="images/charms-top.jpg" alt="" class="charms__top">
+                </div>
+                <div class="charms__wrapper">
+                    <h2 class="charms__heading">浦賀砲台レモネードの<br>3つの魅力</h2>
+                    <div class="charms__contents">
+                        <div class="charms__1">
+                            <p class="charms__number-1">皮ごと仕込んだ芳醇な香り</p>
+                            <img src="images/charm1.png" alt="" class="charms__img1">
+                        </div>
+                        <div class="charms__2">
+                            <p class="charms__number-2">夏は冷やして、冬はホットで</p>
+                            <img src="images/charm2.png" alt="" class="charms__img2">
+                        </div>
+                        <div class="charms__3">
+                            <p class="charms__number-3">買えるのは浦賀だけ！</p>
+                            <img src="images/charm3.png" alt="" class="charms__img3">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="story-divider bottom">
+                    <img src="images/lemon-drop.png" alt="" class="lemon-drop">
+                    <h2>さあさあ、<br>飲みに行きましょう！</h2>
+                    <img src="images/lemon-drop.png" alt="" class="lemon-drop">
+            </div>
+            <section class="reason" id="reason">
+                <div class="reason__lead">
+                    <h2 class="reason__heading">ここでしか<br>買えない理由</h2>
+                    <div class="reason__wrapper">
+                        <p>浦賀砲台レモンレモネードは、神奈川県・浦賀の地でしか味わえない特別な一杯。</p>
+                        <img src="images/reason.png" alt="" class="reason__img">
+                        <p>レモンガーデン浦賀で育てられるレモンは、海から吹き抜ける温暖な風と豊かな太陽の光を受けて、ほかにはない香りと酸味を宿します。</p>
+                        <img src="images/reason2.png" alt="" class="reason2__img">
+                        <p>そして、その収穫されたばかりのレモンを、農園直送で仕立てたのが「浦賀砲台レモネード」。</p>
+                        <img src="images/reason3.png" class="reason3__img">
+                        <p>遠くへ流通させず、ここ浦賀でしか味わえない理由は、鮮度と体験を大切にしているからです。</p>
+                        <p>農園の空気、砲台跡の歴史、海風の香り…そのすべてを含めて味わえるのは、ここを訪れた人だけ。</p>
+                        <p>浦賀砲台レモネードは、まさに「この土地を訪れる体験そのものを味わう一杯」なのです。</p>
+                    </div>
+                </div>
+                <div class="access" id="access">
+                    <div class="access__wrapper">
+                        <p class="access__heading">販売エリア</p>
+                        <div class="access__contents">
+                            <div class="access__1">
+                                <img src="images/map1.png" alt="地図" class="access__1--map">
+                                    <div class="access__lead">
+                                        <p class="access__location"><strong>浦賀レモンガーデン</strong></p>                           
+                                        <p class="access__transportation">浦賀駅より京急バスで燈明堂入口下車徒歩15分</p>
+                                    </div>
+                            </div>
+                            <div class="access__2">
+                                <img src="images/map2.png" alt="地図" class="access__2--map">
+                                    <div class="access__lead">
+                                        <p class="access__location"><strong>横須賀温泉浦賀の湯エリア内「ほの湯市場」</strong></p>
+                                        <p class="access__transportation">馬堀海岸駅徒歩12分</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="contact" id="contact">
+                <h2 class="contact__heading">最新情報はこちら</h2>
+                <div class="contact__followus">
+                    <p class="followus--text">Follow us!</p>
+                    <div class="contact__sns">
+                        <a href="" class="facebook"><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
+                        <a href="" class="instagram"><i class="fa-brands fa-instagram fa-lg" style="color: #ffffff;"></i></a>
+                    </div>
+                </div>
+                <a href="" class="email"><i class="fa-regular fa-envelope" style="color: #ffffff;"></i>お問い合わせフォーム</a>  
+                <footer class='site-footer'>
+                    &copy;2025 Lemon Garden Uraga.<br>All Right Reserved.
+                </footer>
+            </section>
+        </div>
+    </main>
+    <script>
+        // IntersectionObserverで .reveal 要素をふわっと表示
+        (function () {
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) return; // CSS側で即時表示に
+
+            const selector = [
+                '.hero__title-group', '.hero__button', '.hero__black-ship', '.hero__glassbottle',
+                '.story__heading', '.story p', '.story__img',
+                '.about__heading', '.about1', '.about2',
+                '.charms__heading', '.charms__1', '.charms__2', '.charms__3',
+                '.reason__heading', '.reason__wrapper > *',
+                '.access__heading', '.access__1', '.access__2',
+                '.contact__heading', '.contact__sns', '.email'
+            ].join(',');
+
+            const targets = Array.from(document.querySelectorAll(selector));
+            if (!targets.length) return;
+            targets.forEach(el => el.classList.add('reveal'));
+
+            const io = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-in');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+
+            targets.forEach(el => io.observe(el));
+        })();
+
+        // ページ内リンクを押したらハンバーガーを自動クローズ
+        (function () {
+            const navToggle = document.getElementById('nav-toggle');
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', () => { if (navToggle) navToggle.checked = false; });
+            });
+        })();
+    </script>
+</body>
+
+</html>

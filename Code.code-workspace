@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../ポートフォリオ/Code"
+		},
+		{
+			"path": "../../../学習/Markdown"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Code"
+	}
+}
