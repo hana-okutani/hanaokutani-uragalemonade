@@ -238,11 +238,17 @@ body.fadeout {
         scroll-behavior: auto;
     }
 
-    .reveal,
+    /* 完全無効にはしない：距離を短くし、短いフェードだけ許可 */
+    .reveal {
+        opacity: 0;
+        transform: translateY(6px);           /* 16px → 6px に縮小 */
+        transition: opacity .25s ease, transform .25s ease; /* 短め */
+        will-change: opacity, transform;
+    }
+
     .reveal.is-in {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
+        opacity: 1;
+        transform: none;
     }
 }
 
@@ -302,7 +308,7 @@ header.site-header {
     inset-inline-start: 0;
     inline-size: 24px;
     block-size: 2px;
-    background: var(--main-text);
+    background: var(--main-bg);
     transition: transform .3s ease, opacity .3s ease, top .3s ease, bottom .3s ease;
 }
 
@@ -387,6 +393,11 @@ nav li a {
     bottom: 0;
     transform: rotate(-45deg);
 }
+/* ×のときだけ色を変える */
+.nav-toggle:checked ~ .hamburger .bar::before,
+.nav-toggle:checked ~ .hamburger .bar::after {
+    background: var(--main-text);
+}
 
 .nav-toggle:checked ~ nav {
     opacity: 1;
@@ -436,15 +447,9 @@ nav li a {
 
 @media (min-width: 1024px) {
     .hero {
-        /* 上下を個別に可変：900px→1200pxで 上160→80 / 下120→40 */
-        padding-block-start: clamp(80px, calc(160px - (80px * (100vw - 900px) / 300)), 160px);
-        padding-block-end: clamp(80px, calc(160px - (80px * (100vw - 900px) / 300)), 160px);
+        padding-block-end: 0;
         position: relative;
-
-        /* ★ 900px以上では最大高さを1054pxに制限 */
-        /* max-block-size: 1054px; */
-        /* = max-height */
-    }
+}
 }
 
 .hero__black-ship {
@@ -465,17 +470,33 @@ nav li a {
     width: clamp(350px, 60vw, 460px);
     filter: drop-shadow(18px 21px 12px rgba(0, 50, 101, 0.6));
     /* margin-inline-start: clamp(13%, 60vw, 25%); */
-    margin-bottom: 0;
+    margin: 60px 0;
 }
 
-@media (min-width: 1024px) {
-    .hero__glassbottle {
-        /*スムーズではないけど、上にあげる*/
-        /* MEMO: コメントアウト */
-        /* position: relative;
-        top: -200px; */
-    }
+.common__container {
+    width: 100%;
+    max-width: 1000px;
+    margin-inline: auto;
+    /* border: 8px solid red; */
+    position: relative;
+
 }
+
+/* hero 追記 */
+.hero__contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* 900px〜：横並びに戻す */
+@media (min-width: 900px) {
+    .hero__contents {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+}
+
 
 .hero__title-group {
     display: flex;
@@ -490,29 +511,31 @@ nav li a {
     /* ～899px までは中央寄せ */
     margin-inline: auto;
 
-    /* MEMO: 追記 */
-    padding-top: 32%;
+
 }
 
 /* 900pxから右寄せに移行（900pxで48pxの右余白→1200pxで0pxへ）*/
+/* 390px前後での押し下げ軽減（任意） */
+@media (max-width: 420px) {
+    .hero__title-group {
+
+        align-items: center;
+        /* 文字も中央寄せに */
+        text-align: center;
+    }
+}
 @media (min-width: 900px) {
     .hero__title-group {
         margin-inline: 0;
         margin-inline-start: auto;
         /* 右寄せの基準 */
         margin-inline-end: clamp(32px, 66vw, 150px);
+        margin-inline: 0; /* 既存の右寄せルールが活きるように */
+        /* MEMO: 追記 */
+        padding-top: 32%;
     }
 }
 
-@media (min-width: 1024px) {
-
-    /*スムーズではないけど、上にあげる*/
-    .hero__title-group {
-        /* MEMO: コメントアウト */
-        /* position: relative;
-        top: -650px; */
-    }
-}
 
 .hero p {
     padding-inline: 0;
@@ -564,24 +587,20 @@ nav li a {
     box-shadow: 0 4px 6px -1px #488aec31,
         0 2px 4px -1px #488aec17;
     transition: all 0.6s ease;
-    /* MEMO: コメントアウト */
-    /* position: relative; */
     z-index: 1;
-    /* MEMO: 追記 */
-    position: absolute;
-    bottom: -45%;
-    left: -12%;
+    position: relative; /* 中央寄せを効かせるため absolute を解除 */
+    bottom: auto;
+    left: auto;
 }
 
 @media (min-width: 900px) {
     .hero__button {
-        /* margin-inline: 0;
-        margin-inline-start: 50px; */
+        margin-inline-start: 0px;
         /* 必要なら微調整 */
         width: 30%;
         aspect-ratio: 1/1;
         border-radius: 9999px;
-        /* position: relative; */
+        position: relative; 
 
         /* 中央寄せ（縦横） */
         display: grid;
@@ -597,13 +616,13 @@ nav li a {
     }
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
     .hero__button {
         width: 33%;
         transform: translate(65vw, -40vw);
         font-size: var(--fs-p);
     }
-}
+} */
 
 .hero__button:hover {
     box-shadow:
@@ -622,35 +641,10 @@ nav li a {
     height: 1.25rem;
 }
 
-/* セクション切り替え */
-/* 擬似要素で波型SVGを配置 */
-.hero::after {
-    /* content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1%; */
-    /* セクションの下端に貼り付け */
-    /* width: 100%; */
-    /* 常に要素幅＝画面幅いっぱい */
-    /* height: clamp(120px, 66vw, 600px); */
-    /* 縦はvwで可変（比率に合わせて調整可） */
-    /* background: url("images/wave1.svg") center bottom / 100% auto no-repeat; */
-    /* 横100%ではみ出さない*/
-    /* pointer-events: none;
-    z-index: 0; */
-    /* テキストより背面、背景色より前面の安全位置 */
-}
-
-@media (min-width: 900px) {
-    /* .hero::after {
-        transform: translateY(clamp (1%, 2vw, 13%));
-    } */
-}
 
 /* STORY */
 .story {
-    margin-block-end: clamp(128px, 46vw, 540px);
+    margin-block-end: clamp(280px, 46vw, 540px);
 }
 
 @media (min-width: 1024px) {
@@ -700,8 +694,11 @@ nav li a {
     position: relative;
     overflow-y: visible;
     overflow-x: clip;
-    /*hiddenだとyも消えてしまったのでNG*/
+
 }
+
+/* 画像＝“下地レイヤー” */
+
 
 /*568px以上で中央寄せ、背景はwidth:100%のまま*/
 @media (min-width: 568px) {
@@ -713,11 +710,11 @@ nav li a {
 }
 
 /*storyとaboutの切り替え円*/
-.about::before {
+.about::before { 
     content: "";
     position: absolute;
     left: 50%;
-    top: 0;
+    top: 0; 
     /* セクションの上端を基準に配置 */
     transform: translate(-50%, -35%);
     /* 上方向に35%はみ出させて、story側に食い込ませる */
@@ -726,18 +723,19 @@ nav li a {
     /* 正円を維持 */
     background: url("images/circle.svg") center / contain no-repeat;
     pointer-events: none;
-    z-index: 0;
+    z-index: 0; 
     /* テキストより背面、背景色より前面の安全位置 */
-    will-change: transform;
+    will-change: transform; 
     /* スクロールやリサイズでtransformが変化する要素にヒント */
-    contain: paint;
+    contain: paint; 
     /* 再描画をこの要素の中に閉じ込める */
 }
 
 
 
+
 /*storyとaboutの切り替え円*/
-.about::after {
+    .about::after {
     content: "";
     position: absolute;
     left: 50%;
@@ -746,7 +744,7 @@ nav li a {
     transform: translate(-50%, 55%);
     /* 下方向に35%はみ出させて、story側に食い込ませる */
     width: clamp(443px, calc(443px + (1010 * (100vw - 390px) / 810)), 1453px);
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; 
     /* 正円を維持 */
     background: url("images/circle2.svg") center / contain no-repeat;
     pointer-events: none;
@@ -756,14 +754,13 @@ nav li a {
     /* スクロールやリサイズでtransformが変化する要素にヒント */
     contain: paint;
     /* 再描画をこの要素の中に閉じ込める */
-
 }
 
-.about > * {
+/* .about > * {
     /*テキストを擬似要素の全面に置くため*/
-    position: relative;
+    /* position: relative;
     z-index: 1;
-}
+} */ 
 
 .about__heading {
     position: relative;
@@ -1260,7 +1257,7 @@ nav li a {
 
 .contact h2 {
     font-family: "Noto San JP";
-    font-size: clamp(20px, 60vw, 32px);
+    font-size: clamp(16px, 4.5vw, 32px);
     font-weight: 500;
     margin-block-end: var(--space-md);
 }
@@ -1385,19 +1382,5 @@ footer::before {
     pointer-events: none;
     z-index: -1;
     /* フッター背景より前・テキストより後ろに調整可 */
-}
-
-/* 以下追記 */
-.common__container {
-    width: 100%;
-    max-width: 1000px;
-    margin-inline: auto;
-    /* border: 8px solid red; */
-    position: relative;
-}
-
-/* hero 追記 */
-.hero__contents {
-    display: flex;
 }
 
